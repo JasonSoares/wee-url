@@ -21,7 +21,9 @@ defmodule WeeWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", WeeWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", WeeWeb.API do
+    pipe_through :api
+
+    post "/links", LinkController, :create
+  end
 end
