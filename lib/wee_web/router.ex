@@ -17,6 +17,7 @@ defmodule WeeWeb.Router do
   scope "/", WeeWeb do
     pipe_through :browser
 
+    get "/:slug", LinkController, :show
     get "/", PageController, :index
   end
 
