@@ -25,7 +25,15 @@ config :wee, WeeWeb.Endpoint,
   secret_key_base: "5DFbLCMktz4JztHmfG5RpUvQBG5/iKdl9Eo+7d+B8/8eaD+HYmt0+LVXBMvTJi7Z",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    npx: [
+      "tailwindcss",
+      "--input=css/app.css",
+      "--output=../priv/static/assets/app.css",
+      "--postcss",
+      "--watch",
+      cd: Path.expand("../assets", __DIR__)
+    ]
   ]
 
 # ## SSL Support
