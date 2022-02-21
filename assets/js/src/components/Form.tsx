@@ -1,32 +1,50 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form'
+import { FormMode } from '../types/Form'
 
+export interface FormFields {
+  url: string
+}
 interface Props {
   onSubmit: any
+  mode: FormMode
+  inputChanged?: any
+  register: UseFormRegister<FormFields>
+  handleSubmit: UseFormHandleSubmit<FormFields>
 }
 
-const Form: React.FC<Props> = ({ onSubmit }) => {
-  const { register, handleSubmit, formState: {errors} } = useForm()
+const Form: React.FC<Props> = ({ onSubmit, inputChanged, mode, register, handleSubmit }) => {
+  // const { register, handleSubmit, formState: {errors} } = useForm()
+  const field = register("url", { required: "required"})
 
   return (
     <form
-      className="bg-white shadow-md rounded px-8 pt-6 pb-8"
+      className="w-full max-w-lg"
       onSubmit={handleSubmit(onSubmit)}>
-      <div className="mb-6">
-        <label
-          htmlFor="url"
-          className="block text-gray-700 text-sm font-bold mb-2">Url:</label>
+      <div className="flex items-center border border-indigo-500 rounded mb-1">
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-          {...register("url", { required: "required" })}
           name="url"
+          type="text"
+          aria-label="Enter a url"
+          // aria-invalid={errors.url ? "true" : "false"}
+          className="appearance-none bg-transparent border-none w-full text-gray-700 py-2 px-2 leading-tight focus:outline-none flex-grow"
+          {...field}
+          onChange={(e) => {
+            inputChanged && inputChanged()
+            field.onChange(e)
+          }}
+          placeholder="http://www.example.com"
         />
-        <p className="text-red-500 text-xs italic">{errors.url?.message}</p>
+        <input
+          className="flex-shrink-0 bg-indigo-700 hover:bg-indigo-500 border-indigo-500 hover:border-indigo-700 text-sm text-white py-2 px-2"
+          type="submit"
+          value={mode === "shorten" ? "Shorten URL" : "Copy"}
+        />
       </div>
-      <input
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        type="submit"
-        value="Shorten URL" />
+      {/* {errors.url && errors.url.type === "required" && (
+        <p role="alert" className="text-red-500 text-xs italic">Please enter a valid url</p>
+      )} */}
+
     </form>
   )
 }
