@@ -35,6 +35,6 @@
     "test:watch": "jest --watch",
     "lint": "eslint js/**",
     "lint:fix": "eslint --fix js/**",
-    "deploy": "cd .. && mix assets.deploy && rm -f _build/esbuild"
+    "deploy": "NODE_ENV=production tailwindcss --postcss --minify --input=css/app.css --output=../priv/static/assets/app.css"
   }
 }
