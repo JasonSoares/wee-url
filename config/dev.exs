@@ -2,10 +2,7 @@ import Config
 
 # Configure your database
 config :wee, Wee.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "wee_dev",
+  url: System.get_env("DATABASE_URL"),
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -18,10 +15,10 @@ config :wee, Wee.Repo,
 config :wee, WeeWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: {0, 0, 0, 0}, port: 4001],
   check_origin: false,
   code_reloader: true,
-  debug_errors: true,
+  debug_errors: false,
   secret_key_base: "5DFbLCMktz4JztHmfG5RpUvQBG5/iKdl9Eo+7d+B8/8eaD+HYmt0+LVXBMvTJi7Z",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
