@@ -1,3 +1,3 @@
-import { useLocalStorage } from "./useLocalStorage/useLocalStorage";
+import { useLocalStorage } from './useLocalStorage/useLocalStorage'
 
-export {useLocalStorage }
+export { useLocalStorage }

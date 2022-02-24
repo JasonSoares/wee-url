@@ -1,1 +1,1 @@
-export type FormMode = "shorten" | "copy"
+export type FormMode = 'shorten' | 'copy'

@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react'
 
-export function useLocalStorage<T>(key: string, initialValue: T): [T, typeof setValue] {
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T,
+): [T, typeof setValue] {
   const [value, setValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key)
-      const parsedItem = JSON.parse(item)
+      const parsedItem = JSON.parse(item!)
       return parsedItem || initialValue
     } catch {
       return initialValue
@@ -12,9 +15,7 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, typeof set
   })
 
   useEffect(() => {
-    try {
-      localStorage.setItem(key, JSON.stringify(value))
-    } catch {}
+    localStorage.setItem(key, JSON.stringify(value))
   }, [key, value])
 
   return [value, setValue]

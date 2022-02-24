@@ -1,13 +1,13 @@
-import React from "react"
-import { ShortUrl } from "../types/ShortUrl"
-import RecentItem from "./RecentItem"
+import React from 'react'
+import { ShortUrl } from '../types/ShortUrl'
+import RecentItem from './RecentItem'
 
-interface Props {
+export interface Props {
   shortUrls: ShortUrl[]
   onCopy: (url: string) => void
 }
 
-const RecentList = ({ shortUrls, onCopy }: Props) => {
+function RecentList({ shortUrls, onCopy }: Props) {
   return (
     <div className="flex flex-col items-center w-full justify-center mx-auto border-2 rounded-md border-indigo-700">
       {shortUrls.map((item) => (
