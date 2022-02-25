@@ -24,9 +24,6 @@ if config_env() == :prod do
 
   config :wee, Wee.Repo,
     # ssl: true,
-    username: System.get_env("DATABASE_USER"),
-    password: System.get_env("DATABASE_PASS"),
-    database: System.get_env("DATABASE_NAME"),
     hostname: System.get_env("DATABASE_HOST"),
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
 

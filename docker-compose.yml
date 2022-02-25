@@ -8,8 +8,6 @@ services:
     environment:
       DATABASE_URL: ecto://postgres:postgres@db/wee_prod
       DATABASE_USER: postgres
-      DATABASE_PASS: postgres
-      DATABASE_NAME: wee_prod
       DATABASE_PORT: 5432
       DATABASE_HOST: db
     ports:
