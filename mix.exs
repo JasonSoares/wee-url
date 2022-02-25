@@ -63,6 +63,7 @@ defmodule Wee.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "test.frontend": ["cmd --cd assets npm run test"],
       "assets.deploy": ["cmd --cd assets npm run deploy2", "esbuild default --minify", "phx.digest"]
     ]
   end
