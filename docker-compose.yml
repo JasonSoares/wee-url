@@ -1,26 +1,35 @@
 version: '3.8'
 services:
+  phoenix:
+    build:
+      context: .
+    env_file:
+      - docker.env
+    environment:
+      DATABASE_URL: ecto://postgres:postgres@db/wee_prod
+      DATABASE_USER: postgres
+      DATABASE_PASS: postgres
+      DATABASE_NAME: wee_prod
+      DATABASE_PORT: 5432
+      DATABASE_HOST: db
+    ports:
+      - "4000:4000"
+    restart: always
+    depends_on:
+      - db
+
   db:
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
     image: 'postgres:alpine'
     restart: always
     volumes:
       - 'pgdata:/var/lib/postgresql/data'
-  web:
-    build: .
-    depends_on:
-      - db
-    environment:
-      MIX_ENV: dev
-    env_file:
-      - .env
-    ports:
-      - '4001:4001'
-    volumes:
-      - .:/app
+
 volumes:
   pgdata:

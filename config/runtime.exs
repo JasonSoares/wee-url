@@ -24,8 +24,13 @@ if config_env() == :prod do
 
   config :wee, Wee.Repo,
     # ssl: true,
-    url: database_url,
+    username: System.get_env("DATABASE_USER"),
+    password: System.get_env("DATABASE_PASS"),
+    database: System.get_env("DATABASE_NAME"),
+    hostname: System.get_env("DATABASE_HOST"),
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+
+    url: database_url,
     socket_options: maybe_ipv6
 
   # The secret key base is used to sign/encrypt cookies and other secrets.

@@ -1,15 +1,34 @@
-FROM hexpm/elixir:1.13.3-erlang-24.2.1-alpine-3.15.0
+# build stage
+FROM hexpm/elixir:1.13.3-erlang-23.2.3-alpine-3.15.0
 
-WORKDIR /app
+# install build dependencies
+RUN apk update && apk upgrade && \
+    apk add postgresql-client && \
+    apk add nodejs npm && \
+    apk add build-base && \
+    rm -rf /var/cache/apk/*
 
-RUN apk --no-cache --update add nodejs npm \
-    && mix local.rebar --force \
-    && mix local.hex --force
+ENV MIX_ENV prod
 
-COPY . .
+RUN mix do local.hex --force, local.rebar --force
 
-RUN mix do deps.get, compile
-RUN cd ./assets \
-    && npm install
+COPY mix.exs ./
+COPY mix.lock ./
 
-CMD mix deps.get && mix phx.server
+RUN mix do deps.get --only prod
+RUN mix deps.compile
+
+# Cache and compile node packages
+COPY assets/package.json assets/
+RUN cd assets && npm install
+
+COPY . ./
+
+# Run frontend build, compile and digest
+RUN cd assets/ && \
+    npm run deploy && \
+    cd - && \
+    mix do compile, phx.digest
+
+RUN chmod +x entrypoint.sh
+CMD ["/entrypoint.sh"]
