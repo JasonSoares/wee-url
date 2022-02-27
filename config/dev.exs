@@ -2,7 +2,11 @@ import Config
 
 # Configure your database
 config :wee, Wee.Repo,
-  url: System.get_env("DATABASE_URL"),
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "wee_dev",
+  show_sensitive_data_on_connection_error: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
