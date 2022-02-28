@@ -7,6 +7,7 @@
 # anything else that needs to happen before your server is started
 # for the first time
 setup:
+	mix do local.hex --force, local.rebar --force
 	mix do deps.get, deps.compile, ecto.setup
 	MIX_ENV=test mix do deps.compile
 	npm install --prefix assets
