@@ -112,7 +112,6 @@ function App() {
         )
         setRecentUrls(newRecent)
       } catch (err) {
-        console.log({ err })
         setErrorAlert(
           'There was an error handling your request. Please try again later.',
         )

@@ -11,8 +11,9 @@ defmodule WeeWeb.LinkController do
       nil ->
         conn
         |> put_status(:not_found)
+        |> put_root_layout(false)
         |> put_view(WeeWeb.ErrorView)
-        |> render(:"404")
+        |> render(:"404", layout: false)
 
       %Link{url: url} ->
         conn
