@@ -7,9 +7,9 @@
 # anything else that needs to happen before your server is started
 # for the first time
 setup:
-	mix deps.get
+	mix do deps.get, deps.compile, ecto.setup
+	MIX_ENV=test mix do deps.compile
 	npm install --prefix assets
-	mix ecto.setup
 
 # `make server` will be used after `make setup` in order to start
 # an http server process that listens on any unreserved port

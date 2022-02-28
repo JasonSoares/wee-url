@@ -15,9 +15,10 @@ defmodule Wee.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Wee.PubSub},
       # Start the Endpoint (http/https)
-      WeeWeb.Endpoint
+      WeeWeb.Endpoint,
       # Start a worker by calling: Wee.Worker.start_link(arg)
       # {Wee.Worker, arg}
+      {PlugAttack.Storage.Ets, name: WeeWeb.PlugAttack.Storage}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

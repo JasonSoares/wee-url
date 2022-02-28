@@ -8,10 +8,13 @@ defmodule WeeWeb.Router do
     plug :put_root_layout, {WeeWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug WeeWeb.PlugAttack
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+
+    plug WeeWeb.PlugAttack
   end
 
   scope "/", WeeWeb do

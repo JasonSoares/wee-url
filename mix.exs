@@ -44,6 +44,7 @@ defmodule Wee.MixProject do
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.17.5"},
+      {:plug_attack, "~> 0.4.3"},
       {:plug_cowboy, "~> 2.5"},
       {:postgrex, ">= 0.0.0"},
       {:telemetry_metrics, "~> 0.6"},
