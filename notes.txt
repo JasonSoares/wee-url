@@ -36,6 +36,8 @@ recent short URLs, and saves that data to local storage. The recent history list
 if the user wants to share the link. In the event that a link is not found, there is a 404 page that explains what happened and
 provides a link to get back to the main page to submit a short url.
 
+Note: there is a deployed version of the app here: https://wee-url.gigalixirapp.com
+
 Tech Stack:
 
 The front-end is written with TypeScript and Tailwind CSS and uses React.
